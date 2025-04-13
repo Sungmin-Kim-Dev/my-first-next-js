@@ -19,7 +19,6 @@ const Homepage = async () => {
   const movies = await getMovies();
   return (
     <div>
-      <h1>Hello, Next.js!</h1>
       <ul>
         {movies.map((movie) => (
           <li key={movie.id}>
