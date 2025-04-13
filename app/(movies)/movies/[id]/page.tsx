@@ -2,8 +2,8 @@ import {Suspense} from "react";
 import MovieInfo from "../../../../components/movie-info";
 import MovieVideos from "../../../../components/movie-videos";
 
-const MovieDetail = ({params}: {params: {id: string}}) => {
-  const {id} = params;
+const MovieDetail = async ({params}: {params: {id: string}}) => {
+  const {id} = await params;
   return (
     <>
       <Suspense fallback={<h1>Loading Movie Info</h1>}>

@@ -1,10 +1,11 @@
-import Link from "next/link";
+import { API_URL } from "../../components/API_URL";
+import MovieCard from "../../components/movie-card";
+import styles from "../../style/home.module.css";
 
 export const metadata = {
   title: "Home",
 };
 
-export const API_URL = "https://nomad-movies.nomadcoders.workers.dev/movies";
 
 async function getMovies() {
   console.log("fetching...");
@@ -19,11 +20,9 @@ const Homepage = async () => {
   const movies = await getMovies();
   return (
     <div>
-      <ul>
+      <ul className={styles.container}>
         {movies.map((movie) => (
-          <li key={movie.id}>
-            <Link href={`/movies/${movie.id}`}>{movie.title}</Link>
-          </li>
+          <MovieCard key={movie.id} id={movie.id} title={movie.title} poster_path={movie.poster_path} />
         ))}
       </ul>
     </div>

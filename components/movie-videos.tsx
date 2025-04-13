@@ -1,4 +1,5 @@
-import {API_URL} from "../app/(home)/page";
+import styles from "../style/movie-videos.module.css"
+import { API_URL } from "./API_URL";
 
 async function getVideos(id: string) {
   console.log(`Fetching videos: ${Date.now()}`);
@@ -9,25 +10,19 @@ async function getVideos(id: string) {
   return json;
 }
 
-const VideoPlayer = ({videoKey}: {videoKey: string}) => {
-  return (
-    <iframe
-      width="560"
-      height="315"
-      src={`https://www.youtube.com/embed/${videoKey}?si=XKzsuM4MSazdtEL3`}
-      title="YouTube video player"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      referrerPolicy="strict-origin-when-cross-origin"
-      allowFullScreen></iframe>
-  );
-};
-
 const MovieVideos = async ({id}: {id: string}) => {
   const relatedVideos = await getVideos(id);
   return (
-    <div>
-      {relatedVideos.length > 0 && <VideoPlayer key={relatedVideos[0].key} videoKey={relatedVideos[0].key} />}
-      {relatedVideos.length > 1 && <VideoPlayer key={relatedVideos[1].key} videoKey={relatedVideos[1].key} />}
+    <div className={styles.container}>
+      {relatedVideos.map((video) => (
+        <iframe
+          key={video.id}
+          src={`https://youtube.com/embed/${video.key}`}
+          title={video.name}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
+      ))}
     </div>
   );
 };
